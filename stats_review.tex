@@ -1,0 +1,117 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+
+\newtheorem{definition}{Definition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{theorem}{Theorem}
+
+\newtheorem{algorithm}{Algorithm}
+
+\newcommand{\htn}{\hat{\theta}_n} 
+
+\begin{document}
+
+
+
+\section{Types of convergence}
+
+\begin{definition}
+Convergence in distribution is defined via
+\begin{equation}
+F_{X_n} \rightarrow F_X \quad \text{as } n \rightarrow \infty
+\end{equation}
+\end{definition}
+
+\begin{definition}
+	Convergence in probability is defined via
+	\begin{equation}
+	P(|X_n - X| > \epsilon) \quad \text{as } n \rightarrow \infty \  \forall \epsilon
+	\end{equation}
+\end{definition}
+
+\begin{definition}
+	Convergence almost surely is defined via
+	\begin{equation}
+	P(X_n \rightarrow X,  n \rightarrow \infty) = 1 
+	\end{equation}
+\end{definition}
+
+
+\textbf{Almost surely implies in probability implies in distribution!}
+
+\begin{theorem}[Slutsky]
+	
+	Suppose $X_n \xrightarrow{d} X$ and $Y_n \xrightarrow{p} a$ where $a$ is a constant. Then
+	\begin{enumerate}
+		\item $X_n Y_n \xrightarrow{d} aX$
+		\item $X_n + Y_n \xrightarrow{d} X+ a$
+	\end{enumerate}
+\end{theorem}
+
+\section{Fundamental laws}
+\begin{theorem}[Weak Law of Large Numbers]
+	Let $X_1, X_2, \dots , X_n$ be i.i.d distributed random variables with a finite mean $\mu_X$.  Let $S_n = \sum_1^n X_i$.
+	Then
+	\begin{equation}
+	\lim_{n \to \infty} P\left( \lvert \frac{S_n}{n} - \mu_X \rvert > \epsilon) \right)  = 0 \quad \forall \epsilon
+	\end{equation}
+	
+\end{theorem}
+
+\begin{theorem}[Central Limit Theorem]
+	Let $X_1, X_2, \dots , X_n$ be i.i.d distributed random variables with a finite mean $\mu_X$ and finite variance $\sigma_X^2$.
+	Then the sample mean $\bar X_n = \sum_1^n X_i /n$ will follow an approximately normal distribution with mean $\mu_X$, and variance $\sigma^2_X/n$. Alternatively,
+	\begin{equation}
+	\bar X_n \xrightarrow{d} N(\mu_X, \frac{\sigma^2_X}{n})
+	\end{equation}
+\end{theorem}
+
+\section{Basics}
+
+\begin{definition}
+A \textbf{statistical model} is a pair $(E, P_\theta) \quad \theta\in \Theta$ where $E$ is the sample sapce, $P$ is a family of probability distributions and $\theta$ is the parameter set describing the distributions. 
+\end{definition}
+\begin{itemize}
+	\item When $\Theta \in R^d$ we call the model parameteric.  
+	\item When $\Theta$ is infinite dimensional the model is non-parametric
+	\item When $\Theta = \Theta_1 \times \Theta_2$ where $\Theta_1$ is infinite dimesnional and $\Theta_2$ is finite dimensional the model is called semi-parametric.   
+\end{itemize}
+
+\begin{definition}
+A \textbf{statistic} is any measurabable function of the sample.  An \textbf{estimator} of $\theta$ is a statistic $\hat \theta_n =  \hat \theta_n(X_1, X_2, \dots , X_n)$ which does not depend on $\theta$. 
+\end{definition}
+
+\begin{definition}
+An estimator is \textbf{weekly consistent} if $\lim_{n \to \infty} \hat \theta_n = \theta$.
+\end{definition}
+
+\begin{definition}
+The \textbf{bias} of an estimator is given by 
+\begin{equation}
+\text{bias} = E[\hat \theta_n] - \theta
+\end{equation}
+\end{definition}
+
+\begin{definition}
+The \textbf{variance} of an estimator is given by\begin{equation}
+\text{variance} = E \left[ (\hat \theta_n - E[\hat \theta_n])^2 \right]
+\end{equation}
+\end{definition}
+
+\begin{definition}
+The \textbf{quadratic risk} of an estimator is given by
+\begin{align}
+R &= E \left[ (\htn - \theta)^2 \right] = E \left[ (\hat \theta_n - E[\htn] + E[\htn] - \theta )^2  \right] \\
+&=  \text{variance} + \underbrace{ E \left[ \hat \theta_n -
+ E[\htn]  \right]}_{=0} (E[\htn] - \theta) + \text{bias}^2 \\
+& = \text{variance} + \text{bias}^2
+\end{align}
+\end{definition}
+
+
+\end{document}
